@@ -1,0 +1,64 @@
+import sys
+import os
+def restart():
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+
+
+item = []
+preço = []
+descriçao = []
+
+print("Bem vindo ao menu automático.")
+senha = input("Escolha uma senha para acessar o menu de configuração: ")
+v = int(input("Quantos itens tem no seu restaurante: "))
+for i in range(1,v+1):
+  item.append(i)
+for i in range(0,v):
+  preço.append(float(input("Insira o preço do prato nº{}: ".format(i+1))))
+  descriçao.append(input("Insira uma descrição/nome do prato nº{}: ".format(i+1)))
+
+while True:
+  identificaçao = input("informe o número da sua mesa: ")
+  identificaçao2 = input("Informe seu nome: ")
+
+  pedido = []
+  print("                               Cardápio")
+  for i in range(len(item)):
+    print("Código do pedido:", item[i],"             ",preço[item[i]-1],"               ",descriçao[item[i]-1])
+  pedido.append(int(input("Insira o código referente ao seu pedido, temos as seguintes opções no cardápio: ")))
+
+
+  ç = input("Deseja finalizar o pedido? Digita 'y' para sim e 'n' para não.: ")
+  if ç!=('n') and ç!=('y'):
+    print("Uma resposta indevida foi inserida. Porfavor inserir uma resposta válida para o programa (y/n)")
+    ç = input("Deseja finalizar o pedido? Digita 'y' para sim e 'n' para não.: ")
+
+  if ç==('n'):
+    while ç == ('n'):
+      pedido.append(int(input("Adcione o item desejado: ")))
+      ç = input("Deseja finalizar o pedido? Digita 'y' para sim e 'n' para não.: ")
+      
+  if ç==('y'):
+    os.system('clear') or None
+    os.system('cls') or None
+    print("Barzin do ChicoSabbado            Mesa nº",identificaçao,"           Nome do cliente:", identificaçao2)
+  l=0
+
+  for i in range(len(pedido)):
+    l = l + preço[pedido[i]-1]
+    print("Código do pedido:", pedido[i],"             ",preço[pedido[i]-1],"               ",descriçao[pedido[i]-1])
+  print("")
+  print("                                 TOTAL")
+  print("                                 ",l)
+  print("")
+  print("                         Obrigado e volte sempre")
+  z=False
+  Z=input("Insira qualquer coisa para finalizar o programa")
+  if z != False:
+    os.system('clear') or None
+    os.system('cls') or None
+  x=False
+  x=input("Insira algo para iniciar!")
+  if x == senha :
+    restart()
